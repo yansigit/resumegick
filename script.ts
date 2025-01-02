@@ -57,9 +57,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(templateDir + sectionType.replace(/ /g, '') + '.html');
             const text = await response.text();
             sectionDiv.innerHTML += text;
+            addAddMoreListeners(sectionDiv, sectionType); // Add listener for "add more" button
         } catch (error) {
             console.error('Error fetching template:', error);
             sectionDiv.innerHTML += '<p>Error loading section content.</p>';
+        }
+    }
+
+    function addAddMoreListeners(sectionDiv: HTMLDivElement, sectionType: string) {
+        const addMoreButton = sectionDiv.querySelector('.add-more-icon');
+        if (addMoreButton) {
+            addMoreButton.addEventListener('click', () => {
+                const template = addMoreButton.previousElementSibling;
+                if (template) {
+                    const clone = template.cloneNode(true) as HTMLElement;
+                    sectionDiv.insertBefore(clone, addMoreButton);
+                }
+            });
         }
     }
 
