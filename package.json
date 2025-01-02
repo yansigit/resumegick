@@ -1,0 +1,12 @@
+{
+    "name": "resume-builder",
+    "version": "1.0.0",
+    "description": "A simple resume builder",
+    "scripts": {
+        "compile": "tsc && sass style.scss style.css",
+        "build": "pnpm compile"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

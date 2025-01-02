@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Sections</h2>
+            <ul id="sections">
+                <li draggable="true" data-section="contact">Contact Info</li>
+                <li draggable="true" data-section="experience">Experience</li>
+                <li draggable="true" data-section="education">Education</li>
+                <li draggable="true" data-section="skills">Skills</li>
+                <li draggable="true" data-section="summary">Summary</li>
+            </ul>
+        </aside>
+        <main class="preview">
+            <h1>Resume Preview</h1>
+            <div id="resume-content">
+                <!-- Sections will be added here -->
+            </div>
+        </main>
+    </div>
+    <script src="dist/script.js"></script>
+</body>
+
+</html>
