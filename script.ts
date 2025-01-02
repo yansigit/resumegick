@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll<HTMLLIElement>('#sections li');
     const resumeContent = document.getElementById('resume-content');
-    const templateDir = './templates/';
+    const templateDir = '/templates/';
 
     let draggedSection: HTMLElement | null = null;
 

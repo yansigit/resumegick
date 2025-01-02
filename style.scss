@@ -6,29 +6,33 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
+    padding-top: 20px;
 }
 
 .container {
     display: flex;
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px;
+    width: 80%;
+    max-width: 1000px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
+    width: 200px;
+    background-color: #f8f8f8;
+    color: #333;
     padding: 20px;
+    border-right: 1px solid #eee;
 }
 
 .sidebar h2 {
     margin-top: 0;
-    color: #fff;
-    border-bottom: 1px solid #555;
+    color: #333;
+    border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .sidebar ul {
@@ -37,16 +41,18 @@ body {
 }
 
 .sidebar li {
-    background-color: #444;
+    background-color: #fff;
     padding: 10px;
     margin-bottom: 5px;
     cursor: grab;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 3px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 0.9em;
 }
 
 .sidebar li:hover {
-    background-color: #555;
+    background-color: #eee;
 }
 
 .preview {
@@ -54,59 +60,42 @@ body {
     padding: 30px;
 }
 
-.preview h1 {
-    margin-top: 0;
-    color: #333;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
 #resume-content {
     min-height: 200px;
-    border: 1px dashed #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: #999;
-    font-style: italic;
-
-    &:empty {
-        &::before {
-            content: 'Drag here!';
-        }
-    }
+    color: #333;
+    font-style: normal;
 }
 
 .resume-section {
-    border-bottom: 1px solid #eee;
     padding-bottom: 15px;
     margin-bottom: 20px;
-    border: none;
-}
-
-.resume-section:last-child {
-    border-bottom: none;
 }
 
 .resume-section h2 {
     margin-top: 0;
     color: #333;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 5px;
     margin-bottom: 10px;
+    font-size: 1.5em;
 }
 
 .editable {
-    border-bottom: 1px dashed #aaa;
     cursor: text;
-    padding: 5px;
-    margin: 5px 0;
+    padding: 0;
+    margin: 0;
+    display: block;
+    font-size: 1em;
+    line-height: 1.4;
 }
 
 .editable:focus {
-    background-color: #f9f9f9;
+    background-color: #f0f8ff;
     outline: none;
-    border-color: #bbb;
+    border-bottom: 1px dashed #aaa;
+}
+
+.resume-section strong {
+    font-weight: bold;
+    margin-right: 5px;
 }
