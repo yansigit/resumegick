@@ -1,64 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll<HTMLLIElement>('#sections li');
     const resumeContent = document.getElementById('resume-content');
+    const templateDir = './templates/';
+
+    let draggedSection: HTMLElement | null = null;
 
     sections.forEach(section => {
         section.addEventListener('dragstart', (event: DragEvent) => {
+            draggedSection = event.target as HTMLElement;
             event.dataTransfer!.setData('text/plain', section.dataset.section!);
         });
     });
 
     resumeContent?.addEventListener('dragover', (event) => {
         event.preventDefault();
+        const target = event.target as HTMLElement;
+        const sectionDiv = target.closest('.resume-section');
+        if (sectionDiv && draggedSection && sectionDiv !== draggedSection && draggedSection.classList.contains('resume-section')) {
+            const rect = sectionDiv.getBoundingClientRect();
+            const mouseY = event.clientY;
+            if (mouseY < rect.top + rect.height / 2) {
+                resumeContent?.insertBefore(draggedSection, sectionDiv);
+            } else {
+                resumeContent?.insertBefore(draggedSection, sectionDiv.nextSibling);
+            }
+        }
     });
 
     resumeContent?.addEventListener('drop', (event) => {
         event.preventDefault();
-        const sectionType = event.dataTransfer?.getData('text/plain');
-        if (sectionType) {
-            addResumeSection(sectionType);
+        if (draggedSection && draggedSection.hasAttribute('data-section')) {
+            const sectionType = event.dataTransfer?.getData('text/plain');
+            if (sectionType) {
+                addResumeSection(sectionType);
+            }
         }
+        draggedSection = null;
     });
 
     function addResumeSection(sectionType: string) {
         const sectionDiv = document.createElement('div');
         sectionDiv.classList.add('resume-section');
+        sectionDiv.setAttribute('draggable', 'true');
         sectionDiv.innerHTML = `<h2>${sectionType.toUpperCase()}</h2>`;
         sectionDiv.setAttribute('data-section', sectionType);
-        resumeContent?.appendChild(sectionDiv);
         addSectionContent(sectionType, sectionDiv);
+        resumeContent?.appendChild(sectionDiv);
+
+        sectionDiv.addEventListener('dragstart', (event: DragEvent) => {
+            draggedSection = event.target as HTMLElement;
+        });
     }
 
-    function addSectionContent(sectionType: string, sectionDiv: HTMLDivElement) {
-        switch (sectionType) {
-            case 'contact':
-                sectionDiv.innerHTML += `
-                    <div class="editable">Name</div>
-                    <div class="editable">Email</div>
-                    <div class="editable">Phone</div>
-                `;
-                break;
-            case 'experience':
-                sectionDiv.innerHTML += `
-                    <div class="editable">Job Title</div>
-                    <div class="editable">Company</div>
-                    <div class="editable">Dates</div>
-                    <div class="editable">Description</div>
-                `;
-                break;
-            case 'education':
-                sectionDiv.innerHTML += `
-                    <div class="editable">School</div>
-                    <div class="editable">Degree</div>
-                    <div class="editable">Dates</div>
-                `;
-                break;
-            case 'skills':
-                sectionDiv.innerHTML += `<div class="editable">Skill</div>`;
-                break;
-            case 'summary':
-                sectionDiv.innerHTML += `<div class="editable">Summary text</div>`;
-                break;
+    async function addSectionContent(sectionType: string, sectionDiv: HTMLDivElement) {
+        try {
+            const response = await fetch(templateDir + sectionType.replace(/ /g, '') + '.html');
+            const text = await response.text();
+            sectionDiv.innerHTML += text;
+        } catch (error) {
+            console.error('Error fetching template:', error);
+            sectionDiv.innerHTML += '<p>Error loading section content.</p>';
         }
     }
 

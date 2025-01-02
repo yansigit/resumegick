@@ -4,9 +4,12 @@
     "description": "A simple resume builder",
     "scripts": {
         "compile": "tsc && sass style.scss style.css",
-        "build": "pnpm compile"
+        "dev": "pnpm compile && http-server -c-1 ."
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
 }
