@@ -2,8 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll<HTMLLIElement>('#sections li');
     const resumeContent = document.getElementById('resume-content');
     const templateDir = '/templates/';
+    const sidebar = document.querySelector('.sidebar') as HTMLElement;
+    const drawerButton = document.getElementById('drawer-button');
 
     let draggedSection: HTMLElement | null = null;
+
+    drawerButton?.addEventListener('click', () => {
+        sidebar.classList.toggle('closed');
+    });
 
     sections.forEach(section => {
         section.addEventListener('dragstart', (event: DragEvent) => {
@@ -32,20 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (draggedSection && draggedSection.hasAttribute('data-section')) {
             const sectionType = event.dataTransfer?.getData('text/plain');
             if (sectionType) {
-                addResumeSection(sectionType);
+                const target = event.target as HTMLElement;
+                const sectionDiv = target.closest('.resume-section');
+                let index = -1;
+                if (sectionDiv) {
+                    index = Array.from(resumeContent!.children).indexOf(sectionDiv);
+                }
+                addResumeSection(sectionType, index);
             }
         }
         draggedSection = null;
     });
 
-    function addResumeSection(sectionType: string) {
+    function addResumeSection(sectionType: string, index?: number) {
         const sectionDiv = document.createElement('div');
         sectionDiv.classList.add('resume-section');
         sectionDiv.setAttribute('draggable', 'true');
-        sectionDiv.innerHTML = `<h2>${sectionType.toUpperCase()}</h2>`;
         sectionDiv.setAttribute('data-section', sectionType);
         addSectionContent(sectionType, sectionDiv);
-        resumeContent?.appendChild(sectionDiv);
+        if (index !== undefined && index >= 0) {
+            resumeContent?.insertBefore(sectionDiv, resumeContent.children[index]);
+        } else {
+            resumeContent?.appendChild(sectionDiv);
+        }
 
         sectionDiv.addEventListener('dragstart', (event: DragEvent) => {
             draggedSection = event.target as HTMLElement;
@@ -81,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = event.target as HTMLElement;
         if (target.classList.contains('editable')) {
             target.contentEditable = 'true';
-            target.focus();
         }
     });
 

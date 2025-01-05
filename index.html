@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Builder</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/resume-content.css">
 </head>
 
 <body>
     <div class="container">
         <aside class="sidebar">
+            <button id="drawer-button">Toggle</button>
             <h2>Sections</h2>
             <ul id="sections">
+                <li draggable="true" data-section="header">Profile</li>
                 <li draggable="true" data-section="contact">Contact Info</li>
                 <li draggable="true" data-section="experience">Experience</li>
                 <li draggable="true" data-section="education">Education</li>
@@ -21,7 +24,6 @@
             </ul>
         </aside>
         <main class="preview">
-            <h1>Resume Preview</h1>
             <div id="resume-content">
                 <!-- Sections will be added here -->
             </div>

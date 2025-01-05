@@ -3,14 +3,15 @@
     "version": "1.0.0",
     "description": "A simple resume builder",
     "scripts": {
-        "compile": "tsc && sass style.scss style.css",
-        "dev": "concurrently \"tsc --watch\" \"sass --watch style.scss style.css\" \"http-server -c-1 .\""
+        "compile": "tsc && sass styles:styles",
+        "dev": "concurrently \"tsc --watch\" \"sass --watch styles:styles\" \"live-server --port=8080 --no-browser\""
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
         "concurrently": "^9.1.2",
-        "http-server": "^14.1.1"
+        "http-server": "^14.1.1",
+        "live-server": "^1.2.2"
     }
 }
