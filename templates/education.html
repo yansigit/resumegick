@@ -1,7 +1,26 @@
-<h2>Education</h2>
-<div>
-    <div><strong>School:</strong> <span class="editable">School Name</span></div>
-    <div><strong>Degree:</strong> <span class="editable">Degree Earned</span></div>
-    <div><strong>Dates:</strong> <span class="editable">Start Date - End Date</span></div>
-</div>
-<button class="add-more-icon">+</button>
+<section id="education">
+    <h2>Education</h2>
+    <div>
+        <div class="education-item">
+            <strong><span class="editable">School Name</span></strong>
+            <span class="editable">City, State</span>
+        </div>
+        <div class="education-item">
+            <span class="editable">Degree Earned</span>
+            <span class="editable">Graduation Date</span>
+        </div>
+    </div>
+    <button class="add-more-icon">+</button>
+</section>
+
+<style>
+    #education h2 {
+        text-align: center;
+    }
+
+    #education div.education-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>

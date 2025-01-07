@@ -1,7 +1,7 @@
 # Compiled output
 dist/
-style.css
-style.css.map
+*.css
+*.css.map
 
 # Dependencies
 node_modules/
