@@ -83,10 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const addMoreButton = sectionDiv.querySelector('.add-more-icon');
         if (addMoreButton) {
             addMoreButton.addEventListener('click', () => {
-                const template = addMoreButton.previousElementSibling;
+                const dataTemplate = addMoreButton.getAttribute('data-template');
+                const template = addMoreButton.parentElement?.querySelector(`:not(button)[data-template="${dataTemplate}"]`);
                 if (template) {
                     const clone = template.cloneNode(true) as HTMLElement;
-                    sectionDiv.insertBefore(clone, addMoreButton);
+                    addMoreButton.parentElement?.insertBefore(clone, addMoreButton);
                 }
             });
         }
