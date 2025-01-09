@@ -27,10 +27,16 @@
             </ul>
         </aside>
         <main class="preview">
+            <div id="resume-actions">
+                <button id="saveButton">Save</button>
+                <button id="downloadPdfButton">Download PDF</button>
+            </div>
             <div id="resume-content"></div>
         </main>
     </div>
-    <script src="dist/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="dist/script.js" type="module"></script>
 </body>
 
 </html>

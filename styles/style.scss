@@ -81,3 +81,13 @@ body {
     background: #ccc;
     overflow: auto;
 }
+
+.add-more-icon.hidden-pdf {
+    display: none;
+}
+
+@media print {
+    .add-more-icon {
+        display: none !important;
+    }
+}
