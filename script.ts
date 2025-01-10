@@ -53,11 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        let lastLogTime = 0;
         resumeContent?.addEventListener('dragover', (event) => {
             event.preventDefault();
             const target = event.target as HTMLElement;
             const sectionDiv = target.closest('.resume-section');
-            log('Drag over event, target section:', sectionDiv);
+            const now = Date.now();
+            if (now - lastLogTime >= 1000) {
+                log('Drag over event, target section:', sectionDiv);
+                lastLogTime = now;
+            }
             if (sectionDiv && draggedSection && sectionDiv !== draggedSection && draggedSection.classList.contains('resume-section')) {
                 const rect = sectionDiv.getBoundingClientRect();
                 const mouseY = event.clientY;
