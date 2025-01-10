@@ -1,5 +1,8 @@
+let __ENV__ = 'development';
+const templateDir = '/templates/';
+log('Template directory:', templateDir);
+
 declare const html2pdf: any;
-const __ENV__ = 'development';
 
 function log(...args: any[]) {
     if (__ENV__ === 'development') {
@@ -13,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     log('Sections:', sections);
     const resumeContent = document.getElementById('resume-content');
     log('Resume content:', resumeContent);
-    const templateDir = '/templates/';
-    log('Template directory:', templateDir);
     const sidebar = document.querySelector('.sidebar') as HTMLElement;
     log('Sidebar:', sidebar);
     const drawerButton = document.getElementById('drawer-button');
